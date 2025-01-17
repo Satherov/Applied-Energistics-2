@@ -117,7 +117,7 @@ public interface IManagedGridNode {
         return node.getGrid();
     }
 
-    IManagedGridNode setFlags(GridFlags... flags);
+    IManagedGridNode setFlags(GridFlag... flags);
 
     /**
      * Changes the sides of the node's host this node is exposed on.

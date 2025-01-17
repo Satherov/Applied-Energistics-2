@@ -55,6 +55,11 @@ public interface ICablePart extends IPart {
     AECableType getCableConnectionType();
 
     /**
+     * @return the max amount of channels this cable can support by default.
+     */
+    int getMaxChannels();
+
+    /**
      * Change the color of the cable, this should cost a small amount of dye, or something.
      *
      * @param newColor new color

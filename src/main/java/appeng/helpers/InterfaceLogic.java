@@ -36,7 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import appeng.api.config.Actionable;
 import appeng.api.config.FuzzyMode;
 import appeng.api.config.Settings;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
 import appeng.api.networking.crafting.ICraftingLink;
@@ -106,7 +106,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
         this.storage = ConfigInventory.storage(slots).slotFilter(this::isAllowedInStorageSlot)
                 .changeListener(this::onStorageChanged).build();
         this.mainNode = gridNode
-                .setFlags(GridFlags.REQUIRE_CHANNEL)
+                .setFlags(GridFlag.REQUIRE_CHANNEL)
                 .addService(IGridTickable.class, new Ticker());
         this.actionSource = new MachineSource(mainNode::getNode);
 

@@ -24,17 +24,17 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.Direction;
 
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.parts.BusSupport;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.items.parts.ColoredPartItem;
 
 public abstract class DenseCablePart extends CablePart {
-    public DenseCablePart(ColoredPartItem<?> partItem) {
-        super(partItem);
+    public DenseCablePart(ColoredPartItem<?> partItem, int maxChannels) {
+        super(partItem, maxChannels);
 
-        this.getMainNode().setFlags(GridFlags.DENSE_CAPACITY);
+        this.getMainNode().setFlags(GridFlag.DENSE_CAPACITY);
     }
 
     @Override

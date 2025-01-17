@@ -31,7 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Setting;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.parts.IPartItem;
 import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableObject;
@@ -56,7 +56,7 @@ public abstract class UpgradeablePart extends AEBasePart implements IConfigurabl
         });
         registerSettings(configBuilder);
         this.config = configBuilder.build();
-        this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
+        this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
     }
 
     @MustBeInvokedByOverriders

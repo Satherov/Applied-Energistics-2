@@ -30,7 +30,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridConnection;
 import appeng.api.networking.IGridNode;
@@ -68,7 +68,7 @@ public class ToggleBusPart extends AEBasePart {
             .setTagName("outer")
             .setInWorldNode(true)
             .setIdlePowerUsage(0.0)
-            .setFlags(GridFlags.PREFERRED);
+            .setFlags(GridFlag.PREFERRED);
 
     private IGridConnection connection;
     private boolean hasRedstone = false;
@@ -79,7 +79,7 @@ public class ToggleBusPart extends AEBasePart {
         super(partItem);
 
         this.getMainNode().setIdlePowerUsage(0.0);
-        this.getMainNode().setFlags(GridFlags.PREFERRED);
+        this.getMainNode().setFlags(GridFlag.PREFERRED);
     }
 
     @Override

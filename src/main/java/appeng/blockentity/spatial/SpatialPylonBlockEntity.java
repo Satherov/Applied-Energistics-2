@@ -36,7 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
 
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGridMultiblock;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -58,7 +58,7 @@ public class SpatialPylonBlockEntity extends AENetworkedBlockEntity implements I
 
     public SpatialPylonBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL, GridFlags.MULTIBLOCK)
+        this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL, GridFlag.MULTIBLOCK)
                 .setIdlePowerUsage(0.5)
                 .addService(IGridMultiblock.class, this::getMultiblockNodes);
     }

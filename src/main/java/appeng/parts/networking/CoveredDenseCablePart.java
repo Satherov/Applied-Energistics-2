@@ -23,8 +23,8 @@ import appeng.items.parts.ColoredPartItem;
 
 public class CoveredDenseCablePart extends DenseCablePart {
 
-    public CoveredDenseCablePart(ColoredPartItem<?> partItem) {
-        super(partItem);
+    public CoveredDenseCablePart(ColoredPartItem<?> partItem, int maxChannels) {
+        super(partItem, maxChannels);
     }
 
     @Override

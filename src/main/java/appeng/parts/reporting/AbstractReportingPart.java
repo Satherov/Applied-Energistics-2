@@ -31,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
 import appeng.api.implementations.parts.IMonitorPart;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;
 import appeng.api.parts.IPartModel;
@@ -62,7 +62,7 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
         super(partItem);
 
         if (requireChannel) {
-            this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
+            this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
             this.getMainNode().setIdlePowerUsage(1.0 / 2.0);
         } else {
             this.getMainNode().setIdlePowerUsage(1.0 / 16.0); // lights drain less

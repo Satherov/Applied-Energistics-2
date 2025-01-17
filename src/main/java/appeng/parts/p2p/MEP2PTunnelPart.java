@@ -29,7 +29,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridConnection;
 import appeng.api.networking.IGridNode;
@@ -70,12 +70,12 @@ public class MEP2PTunnelPart extends P2PTunnelPart<MEP2PTunnelPart> implements I
             .createManagedNode(this, NodeListener.INSTANCE)
             .setTagName("outer")
             .setInWorldNode(true)
-            .setFlags(GridFlags.DENSE_CAPACITY, GridFlags.CANNOT_CARRY_COMPRESSED);
+            .setFlags(GridFlag.DENSE_CAPACITY, GridFlag.CANNOT_CARRY_COMPRESSED);
 
     public MEP2PTunnelPart(IPartItem<?> partItem) {
         super(partItem);
         this.getMainNode()
-                .setFlags(GridFlags.REQUIRE_CHANNEL, GridFlags.COMPRESSED_CHANNEL)
+                .setFlags(GridFlag.REQUIRE_CHANNEL, GridFlag.COMPRESSED_CHANNEL)
                 .addService(IGridTickable.class, this);
     }
 

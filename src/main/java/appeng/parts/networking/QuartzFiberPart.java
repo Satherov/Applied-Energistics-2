@@ -29,7 +29,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
@@ -64,14 +64,14 @@ public class QuartzFiberPart extends AEBasePart {
         super(partItem);
         this.getMainNode()
                 .setIdlePowerUsage(0)
-                .setFlags(GridFlags.CANNOT_CARRY)
+                .setFlags(GridFlag.CANNOT_CARRY)
                 // Expose the energy service of the outer-node on the main-node
                 .addService(IEnergyOverlayGridConnection.class, this::getTheirEnergyServices);
         this.outerNode = GridHelper.createManagedNode(this, NodeListener.INSTANCE)
                 .setTagName("outer")
                 .setIdlePowerUsage(0)
                 .setVisualRepresentation(partItem)
-                .setFlags(GridFlags.CANNOT_CARRY)
+                .setFlags(GridFlag.CANNOT_CARRY)
                 .setInWorldNode(true)
                 // Expose the energy service of the main-node on the outer-node
                 .addService(IEnergyOverlayGridConnection.class, this::getOurEnergyServices);

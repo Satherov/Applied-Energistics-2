@@ -41,7 +41,7 @@ import net.neoforged.neoforge.common.world.chunk.ForcedChunkManager;
 import appeng.api.config.Setting;
 import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -87,7 +87,7 @@ public class SpatialAnchorBlockEntity extends AENetworkedBlockEntity
 
     public SpatialAnchorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL)
+        getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL)
                 .addService(IGridTickable.class, this);
 
         this.manager = IConfigManager.builder(this::onSettingChanged)

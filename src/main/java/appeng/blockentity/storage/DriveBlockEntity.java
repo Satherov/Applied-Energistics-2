@@ -43,7 +43,7 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 
 import appeng.api.implementations.blockentities.IChestOrDrive;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.orientation.BlockOrientation;
 import appeng.api.orientation.RelativeSide;
@@ -85,7 +85,7 @@ public class DriveBlockEntity extends AENetworkedInvBlockEntity
         super(blockEntityType, pos, blockState);
         getMainNode()
                 .addService(IStorageProvider.class, this)
-                .setFlags(GridFlags.REQUIRE_CHANNEL);
+                .setFlags(GridFlag.REQUIRE_CHANNEL);
         inv.setFilter(new CellValidInventoryFilter());
 
         Arrays.fill(clientSideCellState, CellState.ABSENT);

@@ -33,7 +33,7 @@ import appeng.api.config.PowerMultiplier;
 import appeng.api.config.YesNo;
 import appeng.api.implementations.items.ISpatialStorageCell;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.events.GridSpatialEvent;
 import appeng.api.util.AECableType;
@@ -56,7 +56,7 @@ public class SpatialIOPortBlockEntity extends AENetworkedInvBlockEntity {
 
     public SpatialIOPortBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
+        this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
     }
 
     @Override

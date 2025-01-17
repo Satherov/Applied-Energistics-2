@@ -18,10 +18,7 @@
 
 package appeng.me;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ClassToInstanceMap;
@@ -39,7 +36,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import appeng.api.features.IPlayerRegistry;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.IGridNodeService;
@@ -63,7 +60,7 @@ public class ManagedGridNode implements IManagedGridNode {
         private AEColor gridColor = AEColor.TRANSPARENT;
         private Set<Direction> exposedOnSides = EnumSet.allOf(Direction.class);
         private AEItemKey visualRepresentation = null;
-        private EnumSet<GridFlags> flags = EnumSet.noneOf(GridFlags.class);
+        private Set<GridFlag> flags = new HashSet<>();
         private double idlePowerUsage = 1.0;
         private int owner = -1; // ME player id of owner
         private Level level;
@@ -254,8 +251,8 @@ public class ManagedGridNode implements IManagedGridNode {
     }
 
     @Override
-    public ManagedGridNode setFlags(GridFlags... flags) {
-        var flagSet = EnumSet.noneOf(GridFlags.class);
+    public ManagedGridNode setFlags(GridFlag... flags) {
+        var flagSet = new HashSet<GridFlag>();
         Collections.addAll(flagSet, flags);
         getInitData().flags = flagSet;
         return this;

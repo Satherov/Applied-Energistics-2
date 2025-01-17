@@ -29,8 +29,8 @@ import appeng.api.util.AECableType;
 import appeng.items.parts.ColoredPartItem;
 
 public class GlassCablePart extends CablePart {
-    public GlassCablePart(ColoredPartItem<?> partItem) {
-        super(partItem);
+    public GlassCablePart(ColoredPartItem<?> partItem, int maxChannels) {
+        super(partItem, maxChannels);
     }
 
     @Override

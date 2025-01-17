@@ -39,7 +39,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 
 import appeng.api.implementations.parts.ICablePart;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -67,16 +67,19 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
 
     private final int[] channelsOnSide = { 0, 0, 0, 0, 0, 0 };
 
+    private final int maxChannels;
+
     private Set<Direction> connections = Collections.emptySet();
 
-    public CablePart(ColoredPartItem<?> partItem) {
+    public CablePart(ColoredPartItem<?> partItem, int maxChannels) {
         super(partItem);
         this.getMainNode()
-                .setFlags(GridFlags.PREFERRED)
+                .setFlags(GridFlag.CABLE, GridFlag.PREFERRED)
                 .setIdlePowerUsage(0.0)
                 .setInWorldNode(true)
                 .setExposedOnSides(EnumSet.allOf(Direction.class));
         this.getMainNode().setGridColor(partItem.getColor());
+        this.maxChannels = maxChannels;
     }
 
     @Override
@@ -137,7 +140,7 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
                 if (p != null) {
                     var dist = p.getCableConnectionLength(this.getCableConnectionType());
 
-                    if (dist <= 0 || dist > 8) {
+                    if (dist <= 0 || dist > getMaxChannels()) {
                         continue;
                     }
 
@@ -158,11 +161,11 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
     @Override
     public float getCableConnectionLength(AECableType cable) {
         if (cable == this.getCableConnectionType()) {
-            return 4;
+            return (float) (getMaxChannels() / 2);
         } else if (cable.ordinal() >= this.getCableConnectionType().ordinal()) {
             return -1;
         } else {
-            return 8;
+            return getMaxChannels();
         }
     }
 
@@ -246,7 +249,7 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
         super.writeToStream(data);
 
         boolean[] writeChannels = new boolean[Direction.values().length];
-        byte[] channelsPerSide = new byte[Direction.values().length];
+        int[] channelsPerSide = new int[Direction.values().length];
 
         for (var thisSide : Direction.values()) {
             var part = this.getHost().getPart(thisSide);
@@ -283,17 +286,18 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
         }
     }
 
-    private byte getVisualChannels(int channels) {
+    @Override
+    public int getMaxChannels() {
+        return maxChannels;
+    }
+
+    private int getVisualChannels(int channels) {
         var node = getGridNode();
         if (node == null) {
             return 0;
         }
 
-        byte visualMaxChannels = switch (getCableConnectionType()) {
-            case NONE -> 0;
-            case GLASS, SMART, COVERED -> 8;
-            case DENSE_COVERED, DENSE_SMART -> 32;
-        };
+        int visualMaxChannels = node.getMaxChannels();
 
         // In infinite mode, we either return 0 or full strength
         if (node.getGrid().getPathingService().getChannelMode() == ChannelMode.INFINITE) {
@@ -306,7 +310,7 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
         }
 
         // Generally we round down here
-        var result = (byte) (Math.min(visualMaxChannels, channels * visualMaxChannels / gridMaxChannels));
+        var result = (Math.min(visualMaxChannels, channels * visualMaxChannels / gridMaxChannels));
         // Except if at least 1 channel is used
         if (result == 0 && channels > 0) {
             return 1;

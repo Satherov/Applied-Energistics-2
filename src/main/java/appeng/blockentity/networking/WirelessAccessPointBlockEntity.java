@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import appeng.api.implementations.IPowerChannelState;
 import appeng.api.implementations.blockentities.IWirelessAccessPoint;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.orientation.BlockOrientation;
@@ -57,7 +57,7 @@ public class WirelessAccessPointBlockEntity extends AENetworkedInvBlockEntity
     public WirelessAccessPointBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
         this.inv.setFilter(new AEItemDefinitionFilter(AEItems.WIRELESS_BOOSTER));
-        this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
+        this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
     }
 
     @Override

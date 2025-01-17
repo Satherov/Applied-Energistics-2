@@ -55,7 +55,7 @@ import appeng.api.ids.AEComponents;
 import appeng.api.implementations.blockentities.ICraftingMachine;
 import appeng.api.implementations.blockentities.PatternContainerGroup;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlags;
+import appeng.api.networking.GridFlag;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
@@ -133,7 +133,7 @@ public class PatternProviderLogic implements InternalInventoryHost, ICraftingPro
         this.patternInventory = new AppEngInternalInventory(this, patternInventorySize);
         this.host = host;
         this.mainNode = mainNode
-                .setFlags(GridFlags.REQUIRE_CHANNEL)
+                .setFlags(GridFlag.REQUIRE_CHANNEL)
                 .addService(IGridTickable.class, new Ticker())
                 .addService(ICraftingProvider.class, this);
         this.actionSource = new MachineSource(mainNode::getNode);

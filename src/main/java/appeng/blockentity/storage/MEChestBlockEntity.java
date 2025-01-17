@@ -52,7 +52,7 @@ import appeng.api.config.ViewItems;
 import appeng.api.implementations.blockentities.IColorableBlockEntity;
 import appeng.api.implementations.blockentities.IMEChest;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.events.GridPowerStorageStateChanged;
 import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
@@ -129,7 +129,7 @@ public class MEChestBlockEntity extends AENetworkedPoweredBlockEntity
         this.setInternalMaxPower(PowerMultiplier.CONFIG.multiply(500));
         this.getMainNode()
                 .addService(IStorageProvider.class, this)
-                .setFlags(GridFlag.REQUIRE_CHANNEL);
+                .setFlags(GridFlags.REQUIRE_CHANNEL);
 
         this.setInternalPublicPowerStorage(true);
         this.setInternalPowerFlow(AccessRestriction.WRITE);

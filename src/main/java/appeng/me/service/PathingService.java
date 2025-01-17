@@ -28,7 +28,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 
 import appeng.api.features.IPlayerRegistry;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridMultiblock;
@@ -154,11 +154,11 @@ public class PathingService implements IPathingService, IGridServiceProvider {
             this.recalculateControllerNextTick = true;
         }
 
-        if (gridNode.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+        if (gridNode.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
             this.nodesNeedingChannels.remove(gridNode);
         }
 
-        if (gridNode.hasFlag(GridFlag.CANNOT_CARRY_COMPRESSED)) {
+        if (gridNode.hasFlag(GridFlags.CANNOT_CARRY_COMPRESSED)) {
             this.cannotCarryCompressedNodes.remove(gridNode);
         }
 
@@ -176,11 +176,11 @@ public class PathingService implements IPathingService, IGridServiceProvider {
             this.recalculateControllerNextTick = true;
         }
 
-        if (gridNode.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+        if (gridNode.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
             this.nodesNeedingChannels.add(gridNode);
         }
 
-        if (gridNode.hasFlag(GridFlag.CANNOT_CARRY_COMPRESSED)) {
+        if (gridNode.hasFlag(GridFlags.CANNOT_CARRY_COMPRESSED)) {
             this.cannotCarryCompressedNodes.add(gridNode);
         }
 
@@ -233,7 +233,7 @@ public class PathingService implements IPathingService, IGridServiceProvider {
                 // Prevent ad-hoc networks from being connected to the outside and inside node of P2P tunnels at the
                 // same time
                 // this effectively prevents the nesting of P2P-tunnels in ad-hoc networks.
-                if (node.hasFlag(GridFlag.COMPRESSED_CHANNEL) && !this.cannotCarryCompressedNodes.isEmpty()) {
+                if (node.hasFlag(GridFlags.COMPRESSED_CHANNEL) && !this.cannotCarryCompressedNodes.isEmpty()) {
                     this.adHocNetworkError = AdHocNetworkError.NESTED_P2P_TUNNEL;
                     return 0;
                 }
@@ -242,7 +242,7 @@ public class PathingService implements IPathingService, IGridServiceProvider {
 
                 // Multiblocks only require a single channel. Add the remainder of the multi-block to the ignore-list,
                 // to make this method skip them for channel calculation.
-                if (node.hasFlag(GridFlag.MULTIBLOCK)) {
+                if (node.hasFlag(GridFlags.MULTIBLOCK)) {
                     var multiblock = node.getService(IGridMultiblock.class);
                     if (multiblock != null) {
                         var it = multiblock.getMultiblockNodes();
@@ -299,7 +299,7 @@ public class PathingService implements IPathingService, IGridServiceProvider {
     private void updateNodReq(GridChannelRequirementChanged ev) {
         final IGridNode gridNode = ev.node;
 
-        if (gridNode.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+        if (gridNode.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
             this.nodesNeedingChannels.add(gridNode);
         } else {
             this.nodesNeedingChannels.remove(gridNode);

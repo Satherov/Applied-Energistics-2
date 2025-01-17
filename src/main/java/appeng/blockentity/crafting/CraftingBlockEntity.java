@@ -39,7 +39,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
 import appeng.api.implementations.IPowerChannelState;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridMultiblock;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -66,7 +66,7 @@ public class CraftingBlockEntity extends AENetworkedBlockEntity
 
     public CraftingBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.getMainNode().setFlags(GridFlag.MULTIBLOCK, GridFlag.REQUIRE_CHANNEL)
+        this.getMainNode().setFlags(GridFlags.MULTIBLOCK, GridFlags.REQUIRE_CHANNEL)
                 .addService(IGridMultiblock.class, this::getMultiblockNodes);
     }
 

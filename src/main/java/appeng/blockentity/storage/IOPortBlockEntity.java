@@ -41,7 +41,7 @@ import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
 import appeng.api.inventories.ISegmentedInventory;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -97,7 +97,7 @@ public class IOPortBlockEntity extends AENetworkedInvBlockEntity
     public IOPortBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
         this.getMainNode()
-                .setFlags(GridFlag.REQUIRE_CHANNEL)
+                .setFlags(GridFlags.REQUIRE_CHANNEL)
                 .addService(IGridTickable.class, this);
         this.manager = IConfigManager.builder(this::updateTask)
                 .registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE)

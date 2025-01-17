@@ -18,7 +18,7 @@
 
 package appeng.me.pathfinding;
 
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 
 public interface IPathItem {
 
@@ -48,7 +48,7 @@ public interface IPathItem {
     /**
      * Tests if this path item has the specific grid flag set.
      */
-    boolean hasFlag(GridFlag flag);
+    boolean hasFlag(GridFlags flag);
 
     /* USED BY BOTH */
 

@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridMultiblock;
 import appeng.api.networking.IGridNode;
@@ -114,10 +114,10 @@ public class PathingCalculation {
         if (pathItem instanceof GridConnection) {
             // Grid connection does not have flags, allow any queue.
             possibleIndex = 0;
-        } else if (pathItem.hasFlag(GridFlag.DENSE_CAPACITY)) {
+        } else if (pathItem.hasFlag(GridFlags.DENSE_CAPACITY)) {
             // Dense queue if possible.
             possibleIndex = 0;
-        } else if (pathItem.hasFlag(GridFlag.PREFERRED)) {
+        } else if (pathItem.hasFlag(GridFlags.PREFERRED)) {
             // Cable queue if possible.
             possibleIndex = 1;
         } else {
@@ -146,12 +146,12 @@ public class PathingCalculation {
                     // Set BFS parent.
                     pi.setControllerRoute(i);
 
-                    if (pi.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+                    if (pi.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
                         if (!this.multiblocksWithChannel.contains(pi)) {
                             // Try to use the channel along the path.
                             boolean worked = tryUseChannel((GridNode) pi);
 
-                            if (worked && pi.hasFlag(GridFlag.MULTIBLOCK)) {
+                            if (worked && pi.hasFlag(GridFlags.MULTIBLOCK)) {
                                 var multiblock = ((IGridNode) pi).getService(IGridMultiblock.class);
                                 if (multiblock != null) {
                                     var oni = multiblock.getMultiblockNodes();
@@ -183,7 +183,7 @@ public class PathingCalculation {
      * @return true if allocation was successful
      */
     private boolean tryUseChannel(GridNode start) {
-        if (start.hasFlag(GridFlag.COMPRESSED_CHANNEL) && !start.getSubtreeAllowsCompressedChannels()) {
+        if (start.hasFlag(GridFlags.COMPRESSED_CHANNEL) && !start.getSubtreeAllowsCompressedChannels()) {
             // Don't send a compressed channel through this item.
             return false;
         }

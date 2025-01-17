@@ -41,7 +41,7 @@ import appeng.api.ids.AEComponents;
 import appeng.api.implementations.items.IMemoryCard;
 import appeng.api.implementations.items.MemoryCardColors;
 import appeng.api.implementations.items.MemoryCardMessages;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;
@@ -63,7 +63,7 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends AEBasePa
     public P2PTunnelPart(IPartItem<?> partItem) {
         super(partItem);
         this.getMainNode().setIdlePowerUsage(this.getPowerDrainPerTick());
-        this.getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
+        this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
     }
 
     protected float getPowerDrainPerTick() {

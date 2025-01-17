@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import appeng.api.config.Actionable;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.events.GridControllerChange;
@@ -53,7 +53,7 @@ public class ControllerBlockEntity extends AENetworkedPoweredBlockEntity {
         this.setInternalMaxPower(8000);
         this.setInternalPublicPowerStorage(true);
         this.getMainNode().setIdlePowerUsage(3);
-        this.getMainNode().setFlags(GridFlag.CANNOT_CARRY, GridFlag.DENSE_CAPACITY);
+        this.getMainNode().setFlags(GridFlags.CANNOT_CARRY, GridFlags.DENSE_CAPACITY);
     }
 
     @Override

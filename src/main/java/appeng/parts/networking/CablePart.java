@@ -39,7 +39,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 
 import appeng.api.implementations.parts.ICablePart;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -74,7 +74,7 @@ public abstract class CablePart extends AEBasePart implements ICablePart {
     public CablePart(ColoredPartItem<?> partItem, int maxChannels) {
         super(partItem);
         this.getMainNode()
-                .setFlags(GridFlag.CABLE, GridFlag.PREFERRED)
+                .setFlags(GridFlags.CABLE, GridFlags.PREFERRED)
                 .setIdlePowerUsage(0.0)
                 .setInWorldNode(true)
                 .setExposedOnSides(EnumSet.allOf(Direction.class));

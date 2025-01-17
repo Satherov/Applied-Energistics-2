@@ -40,7 +40,7 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 
 import appeng.api.behaviors.PickupStrategy;
 import appeng.api.config.Actionable;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.security.IActionSource;
@@ -94,7 +94,7 @@ public class AnnihilationPlanePart extends AEBasePart implements IGridTickable {
     public AnnihilationPlanePart(IPartItem<?> partItem) {
         super(partItem);
         getMainNode().addService(IGridTickable.class, this);
-        getMainNode().setFlags(GridFlag.REQUIRE_CHANNEL);
+        getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
     }
 
     @Override

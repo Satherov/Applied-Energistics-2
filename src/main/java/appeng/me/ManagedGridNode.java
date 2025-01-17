@@ -36,7 +36,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import appeng.api.features.IPlayerRegistry;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.IGridNodeService;
@@ -60,7 +60,7 @@ public class ManagedGridNode implements IManagedGridNode {
         private AEColor gridColor = AEColor.TRANSPARENT;
         private Set<Direction> exposedOnSides = EnumSet.allOf(Direction.class);
         private AEItemKey visualRepresentation = null;
-        private Set<GridFlag> flags = new HashSet<>();
+        private Set<GridFlags> flags = new HashSet<>();
         private double idlePowerUsage = 1.0;
         private int owner = -1; // ME player id of owner
         private Level level;
@@ -251,8 +251,8 @@ public class ManagedGridNode implements IManagedGridNode {
     }
 
     @Override
-    public ManagedGridNode setFlags(GridFlag... flags) {
-        var flagSet = new HashSet<GridFlag>();
+    public ManagedGridNode setFlags(GridFlags... flags) {
+        var flagSet = new HashSet<GridFlags>();
         Collections.addAll(flagSet, flags);
         getInitData().flags = flagSet;
         return this;

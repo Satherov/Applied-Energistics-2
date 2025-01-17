@@ -12,7 +12,7 @@ import org.mockito.quality.Strictness;
 
 import net.minecraft.server.level.ServerLevel;
 
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
@@ -43,17 +43,17 @@ public abstract class AbstractGridNodeTest {
         platform.when(Platform::isServer).thenReturn(true);
     }
 
-    protected GridNode makeNode(GridFlag... flags) {
+    protected GridNode makeNode(GridFlags... flags) {
         return new GridNode(level, owner, listener, Set.of(flags));
     }
 
-    protected GridNode makeReadyNode(GridFlag... flags) {
+    protected GridNode makeReadyNode(GridFlags... flags) {
         var node = makeNode(flags);
         node.markReady();
         return node;
     }
 
-    protected GridNode makePoweredNode(GridFlag... flags) {
+    protected GridNode makePoweredNode(GridFlags... flags) {
         var node = makeNode(flags);
         node.addService(IAEPowerStorage.class, new InfinitePowerStorage());
         var grid = node.getInternalGrid();
@@ -63,7 +63,7 @@ public abstract class AbstractGridNodeTest {
         return node;
     }
 
-    protected GridNode makeTickingNode(TickingRequest request, NodeTicker ticker, GridFlag... flags) {
+    protected GridNode makeTickingNode(TickingRequest request, NodeTicker ticker, GridFlags... flags) {
         var node = makeNode(flags);
         node.addService(IGridTickable.class, new IGridTickable() {
             @Override

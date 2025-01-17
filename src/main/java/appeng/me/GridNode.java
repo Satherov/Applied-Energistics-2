@@ -45,7 +45,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 
 import appeng.api.features.IPlayerRegistry;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridConnection;
 import appeng.api.networking.IGridConnectionVisitor;
@@ -120,7 +120,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
     private int subtreeMaxChannels;
     private boolean subtreeAllowsCompressedChannels;
 
-    private final Set<GridFlag> flags;
+    private final Set<GridFlags> flags;
     private ClassToInstanceMap<IGridNodeService> services;
 
     /**
@@ -132,7 +132,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
     public <T> GridNode(ServerLevel level,
             T owner,
             IGridNodeListener<T> listener,
-            Set<GridFlag> flags) {
+            Set<GridFlags> flags) {
         this.level = level;
         this.owner = owner;
         this.listener = listener;
@@ -497,11 +497,11 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
 
     @Override
     public boolean meetsChannelRequirements() {
-        return !flags.contains(GridFlag.REQUIRE_CHANNEL) || this.getUsedChannels() > 0;
+        return !flags.contains(GridFlags.REQUIRE_CHANNEL) || this.getUsedChannels() > 0;
     }
 
     @Override
-    public boolean hasFlag(GridFlag flag) {
+    public boolean hasFlag(GridFlags flag) {
         return flags.contains(flag);
     }
 
@@ -608,7 +608,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
         if (nodeParent.getOwner() instanceof ControllerBlockEntity) {
             this.highestSimilarAncestor = null;
             this.subtreeMaxChannels = getMaxChannels();
-            this.subtreeAllowsCompressedChannels = !hasFlag(GridFlag.CANNOT_CARRY_COMPRESSED);
+            this.subtreeAllowsCompressedChannels = !hasFlag(GridFlags.CANNOT_CARRY_COMPRESSED);
         } else {
             if (nodeParent.highestSimilarAncestor == null) {
                 // Parent is connected to a controller, it is the bottleneck.
@@ -622,7 +622,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
             }
             this.subtreeMaxChannels = Math.min(nodeParent.subtreeMaxChannels, getMaxChannels());
             this.subtreeAllowsCompressedChannels = nodeParent.subtreeAllowsCompressedChannels
-                    && !hasFlag(GridFlag.CANNOT_CARRY_COMPRESSED);
+                    && !hasFlag(GridFlags.CANNOT_CARRY_COMPRESSED);
         }
 
         GridConnection connection = (GridConnection) fast;
@@ -641,7 +641,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
 
     @Override
     public int getMaxChannels() {
-        if (flags.contains(GridFlag.CANNOT_CARRY)) {
+        if (flags.contains(GridFlags.CANNOT_CARRY)) {
             return 0;
         }
 
@@ -650,9 +650,9 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
             return Integer.MAX_VALUE;
         }
 
-        if (flags.contains(GridFlag.CABLE)) {
+        if (flags.contains(GridFlags.CABLE)) {
             return ((CablePart) owner).getMaxChannels();
-        } else if (!flags.contains(GridFlag.DENSE_CAPACITY)) {
+        } else if (!flags.contains(GridFlags.DENSE_CAPACITY)) {
             return 8 * channelMode.getCableCapacityFactor();
         } else {
             return 32 * channelMode.getCableCapacityFactor();
@@ -692,7 +692,7 @@ public class GridNode implements IGridNode, IPathItem, IDebugExportable {
     public void finalizeChannels() {
         this.highestSimilarAncestor = null;
 
-        if (hasFlag(GridFlag.CANNOT_CARRY)) {
+        if (hasFlag(GridFlags.CANNOT_CARRY)) {
             return;
         }
 

@@ -154,7 +154,7 @@ public interface IGridNode {
      * @param flag flags
      * @return true if has flag
      */
-    boolean hasFlag(GridFlag flag);
+    boolean hasFlag(GridFlags flag);
 
     /**
      * @return the ownerID this represents the person who placed the node.

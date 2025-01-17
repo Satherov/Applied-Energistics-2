@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.nbt.CompoundTag;
 
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
@@ -81,7 +81,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
     @Override
     public void removeNode(IGridNode node) {
         if (node.getOwner() instanceof P2PTunnelPart<?> tunnel) {
-            if (tunnel instanceof MEP2PTunnelPart && !node.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+            if (tunnel instanceof MEP2PTunnelPart && !node.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
                 return;
             }
 
@@ -98,7 +98,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
     @Override
     public void addNode(IGridNode node, @Nullable CompoundTag savedData) {
         if (node.getOwner() instanceof P2PTunnelPart<?> tunnel) {
-            if (tunnel instanceof MEP2PTunnelPart && !node.hasFlag(GridFlag.REQUIRE_CHANNEL)) {
+            if (tunnel instanceof MEP2PTunnelPart && !node.hasFlag(GridFlags.REQUIRE_CHANNEL)) {
                 return;
             }
 

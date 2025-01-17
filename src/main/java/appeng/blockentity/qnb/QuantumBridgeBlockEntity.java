@@ -34,7 +34,7 @@ import net.neoforged.neoforge.client.model.data.ModelProperty;
 
 import appeng.api.ids.AEComponents;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.GridFlag;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.orientation.BlockOrientation;
 import appeng.api.util.AECableType;
@@ -71,7 +71,7 @@ public class QuantumBridgeBlockEntity extends AENetworkedInvBlockEntity
 
     public QuantumBridgeBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.getMainNode().setFlags(GridFlag.DENSE_CAPACITY);
+        this.getMainNode().setFlags(GridFlags.DENSE_CAPACITY);
         this.getMainNode().setIdlePowerUsage(22);
         onGridConnectableSidesChanged();
     }
